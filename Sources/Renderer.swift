@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 // TODO: createTexture() - proper enums for access, format
 // TODO: isClipEnabled() - undefined?
@@ -50,7 +50,7 @@ public class Renderer {
 	}
 
 	public var renderTargetSupported : Bool {
-		get { return SDL_RenderTargetSupported(theRenderer) == SDL_TRUE }
+		get { return SDL_RenderTargetSupported(theRenderer).boolValue }
 	}
 
 	public func copyOutputSizeTo(x: inout Int, y: inout Int) {
@@ -116,8 +116,8 @@ public class Renderer {
 		SDL_RenderPresent(theRenderer)
 	}
 
-	public func createTexture(format: UInt32, access: Int, width: Int, height: Int) -> Texture {
-    	let tex = SDL_CreateTexture(theRenderer, format, Int32(access), Int32(width), Int32(height))
+	public func createTexture(format: SDL_PixelFormatFormat, access: SDL_TextureAccess, width: Int, height: Int) -> Texture {
+    	let tex = SDL_CreateTexture(theRenderer, format, access, Int32(width), Int32(height))
     	return Texture(sdlTexture: tex!)
     }
 
@@ -129,8 +129,8 @@ public class Renderer {
 	public func createStreamingTexture(width: Int, height: Int) -> Texture {
 		let tex = SDL_CreateTexture(
 			theRenderer,
-			Uint32(SDL_PIXELFORMAT_ARGB8888),
-			Int32(SDL_TEXTUREACCESS_STREAMING),
+			.PIXELFORMAT_ARGB8888,
+			.streaming,
 			Int32(width),
 			Int32(height)
 		)
@@ -260,7 +260,7 @@ public class Renderer {
 public class WindowRenderer : Renderer {
 	public init(window: Window) {
 		theWindow = window
-		super.init(renderer: SDL_CreateRenderer(window._sdlWindow(), -1, UInt32(0)))
+		super.init(renderer: SDL_CreateRenderer(window._sdlWindow(), -1, []))
 	}
 
 	let theWindow: Window

@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 public typealias Rect = SDL_Rect
 extension Rect {
@@ -75,7 +75,7 @@ extension Rect {
 	}
 
 	mutating public func translateBy(dx: Int, dy: Int) {
-		x += dx; y += dy
+		x += Int32(dx); y += Int32(dy)
 	}
 
 	public func translateBy(point: Point, outRect: inout Rect) {
@@ -86,8 +86,8 @@ extension Rect {
 	}
 
 	public func translateBy(dx: Int, dy: Int, outRect: inout Rect) {
-		outRect.x = x + dx
-		outRect.y = y + dy
+		outRect.x = x + Int32(dx)
+		outRect.y = y + Int32(dy)
 		outRect.w = w
 		outRect.h = h
 	}
@@ -97,6 +97,6 @@ extension Rect {
 	}
 
 	public func translatedBy(dx: Int, dy: Int) -> Rect {
-		return Rect(x: x + dx, y: y + dy, w: w, h: h)
+		return Rect(x: x + Int32(dx), y: y + Int32(dy), w: w, h: h)
 	}
 }

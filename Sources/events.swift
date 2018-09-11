@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 // TODO: review filtering/watching for thread safety
 // TODO: SDL_RecordGesture
@@ -14,11 +14,11 @@ public class WatchID {
 public class Events {
 
 	public static func isEventTypeEnabled(type: SDL_EventType) -> Bool {
-		return SDL_EventState(type.rawValue, -1) == 1
+		return SDL_EventState(type, -1) == 1
 	}
 
 	public static func setEventTypeEnabled(type: SDL_EventType, _ enabled: Bool) {
-		SDL_EventState(type.rawValue, enabled ? SDL_ENABLE : SDL_DISABLE)
+		SDL_EventState(type, enabled ? SDL_ENABLE : SDL_DISABLE)
 	}
 
 	public static func registerEvents(count: Int) -> UInt32 {
@@ -70,50 +70,50 @@ public class Events {
 	}
 
 	public class func flush(type: SDL_EventType) {
-		SDL_FlushEvent(type.rawValue)
-	}
-
-	public class func flush(type: UInt32) {
 		SDL_FlushEvent(type)
 	}
 
+	public class func flush(type: UInt32) {
+		SDL_FlushEvent(SDL_EventType(rawValue: SDL_EventType.RawValue(type))!)
+	}
+
 	public class func flush(minType min: SDL_EventType, maxType max: SDL_EventType) {
-		SDL_FlushEvents(min.rawValue, max.rawValue)
+		SDL_FlushEvents(min, max)
 	}	
 
 	public class func flush(minType min: UInt32, maxType max: UInt32) {
-		SDL_FlushEvents(min, max)
+		SDL_FlushEvents(SDL_EventType(rawValue: SDL_EventType.RawValue(min))!, SDL_EventType(rawValue: SDL_EventType.RawValue(max))!)
 	}
 
 	public class func add(events: inout [Event], count: Int = -1) {
 		let c = (count == -1) ? events.count : count
-		SDL_PeepEvents(&events, Int32(c), SDL_ADDEVENT, SDL_FIRSTEVENT.rawValue, SDL_LASTEVENT.rawValue)
+		SDL_PeepEvents(&events, Int32(c), .add, .FIRSTEVENT, .LASTEVENT)
 	}
 
-	public class func get(events: inout [Event], count: Int = -1, minType: UInt32 = SDL_FIRSTEVENT.rawValue, maxType: UInt32 = SDL_LASTEVENT.rawValue) {
+	public class func get(events: inout [Event], count: Int = -1, minType: SDL_EventType = .FIRSTEVENT, maxType: SDL_EventType = .LASTEVENT) {
 		let c = (count == -1) ? events.count : count
-		SDL_PeepEvents(&events, Int32(c), SDL_GETEVENT, SDL_FIRSTEVENT.rawValue, SDL_LASTEVENT.rawValue)
+		SDL_PeepEvents(&events, Int32(c), .get, .FIRSTEVENT, .LASTEVENT)
 	}
 
-	public class func peek(events: inout [Event], count: Int = -1, minType: UInt32 = SDL_FIRSTEVENT.rawValue, maxType: UInt32 = SDL_LASTEVENT.rawValue) {
+	public class func peek(events: inout [Event], count: Int = -1, minType: SDL_EventType = .FIRSTEVENT, maxType: SDL_EventType = .LASTEVENT) {
 		let c = (count == -1) ? events.count : count
-		SDL_PeepEvents(&events, Int32(c), SDL_PEEKEVENT, minType, maxType)
+		SDL_PeepEvents(&events, Int32(c), .peek, minType, maxType)
 	}
 
 	public class func hasEvent(type: SDL_EventType) -> Bool {
-		return SDL_HasEvent(type.rawValue) == SDL_TRUE
+		return SDL_HasEvent(type).boolValue
 	}
 
 	public class func hasEvent(type: UInt32) -> Bool {
-		return SDL_HasEvent(type) == SDL_TRUE
+		return SDL_HasEvent(SDL_EventType(rawValue: SDL_EventType.RawValue(type))!).boolValue
 	}
 
 	public class func hasEvents(minType: SDL_EventType, maxType: SDL_EventType) -> Bool {
-		return SDL_HasEvents(minType.rawValue, maxType.rawValue) == SDL_TRUE
+		return SDL_HasEvents(minType, maxType).boolValue
 	}
 
 	public class func hasEvents(minType: UInt32, maxType: UInt32) -> Bool {
-		return SDL_HasEvents(minType, maxType) == SDL_TRUE
+		return SDL_HasEvents(SDL_EventType(rawValue: SDL_EventType.RawValue(minType))!, SDL_EventType(rawValue: SDL_EventType.RawValue(maxType))!).boolValue
 	}
 
 	//public class func qUItRequested() {
@@ -211,36 +211,36 @@ public extension Event {
 	// App
 
 	public var isQuit: Bool {
-		return self.type == SDL_QUIT.rawValue
+		return self.type == .QUIT
 	}
 
 	//
 	// Window
 
 	public var isWindow: Bool {
-		return self.type == SDL_WINDOWEVENT.rawValue 
+		return self.type == .WINDOWEVENT
 	}
 
 	public var isWindowClose: Bool {
-		return self.window.event == UInt8(SDL_WINDOWEVENT_CLOSE) 
+		return self.window.event == .close
 	}
 
 	// Keyboard
 
 	public var isKeyDown: Bool {
-		return self.type == SDL_KEYDOWN.rawValue 
+		return self.type == .KEYDOWN
 	}
 
 	public var isKeyUp: Bool {
-		return self.type == SDL_KEYUP.rawValue 
+		return self.type == .KEYUP
 	}
 
 	public var isTextEditing: Bool {
-		return self.type == SDL_TEXTEDITING.rawValue 
+		return self.type == .TEXTEDITING
 	}
 
 	public var isTextInput: Bool {
-		return self.type == SDL_TEXTINPUT.rawValue 
+		return self.type == .TEXTINPUT
 	}
 
 	//public var isKeyMapChanged: Bool {
@@ -251,7 +251,7 @@ public extension Event {
 	// TODO: "state" member
 
 	public var isMouseMotion: Bool {
-		return self.type == SDL_MOUSEMOTION.rawValue 
+		return self.type == .MOUSEMOTION
 	}
 
 	public var mouseMotionWhich: UInt32 { return self.motion.which  }
@@ -261,11 +261,11 @@ public extension Event {
 	public var mouseMotionDY: Int { return Int(self.motion.yrel)  }
 	
 	public var isMouseButtonDown: Bool {
-		return self.type == SDL_MOUSEBUTTONDOWN.rawValue 
+		return self.type == .MOUSEBUTTONDOWN
 	}
 
 	public var isMouseButtonUp: Bool {
-		return self.type == SDL_MOUSEBUTTONUP.rawValue 
+		return self.type == .MOUSEBUTTONUP
 	}
 
 	public var isLeftMouseButton: Bool {
@@ -297,7 +297,7 @@ public extension Event {
 	public var mouseButtonClicks: Int { return Int(self.button.clicks)  }
 
 	public var isMouseWheel: Bool {
-		return self.type == SDL_MOUSEWHEEL.rawValue 
+		return self.type == .MOUSEWHEEL 
 	}
 
 	public var mouseWheelWhich: UInt32 { return self.wheel.which  }

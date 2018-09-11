@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 public struct Display {
 	public static var count: Int {

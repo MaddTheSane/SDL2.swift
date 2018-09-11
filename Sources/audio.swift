@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 // Quite a lot missing here; going to wait until I've looked at SDL_mixer
 // before deciding on the best approach
@@ -52,18 +52,18 @@ extension sdl {
 			return String(cString: SDL_GetAudioDriver(Int32(index)))
 		}
 
-		public static func openDefaultPlaybackDevice(spec: AudioSpec, allowedChanges: AudioChange = AudioChange.NONE) -> AudioDevice? {
+		public static func openDefaultPlaybackDevice(spec: SDL_AudioSpec, allowedChanges: SDL_AudioAllowedChanges = []) -> AudioDevice? {
 			return openPlaybackDevice(device: nil, spec: spec, allowedChanges: allowedChanges)
 		}
 
-		public static func openDefaultCaptureDevice(spec: AudioSpec, allowedChanges: AudioChange = AudioChange.NONE) -> AudioDevice? {
+		public static func openDefaultCaptureDevice(spec: SDL_AudioSpec, allowedChanges: SDL_AudioAllowedChanges = []) -> AudioDevice? {
 			return openCaptureDevice(device: nil, spec: spec, allowedChanges: allowedChanges)
 		}
 
-		public static func openPlaybackDevice(device: String?, spec: AudioSpec, allowedChanges: AudioChange = AudioChange.NONE) -> AudioDevice? {
+		public static func openPlaybackDevice(device: String?, spec: SDL_AudioSpec, allowedChanges: SDL_AudioAllowedChanges = []) -> AudioDevice? {
 			var desiredSpec : AudioSpec = spec
 			var obtainedSpec : AudioSpec = AudioSpec()
-			let res = SDL_OpenAudioDevice(device, 0, &desiredSpec, &obtainedSpec, allowedChanges.rawValue)
+			let res = SDL_OpenAudioDevice(device, 0, &desiredSpec, &obtainedSpec, allowedChanges)
 			if res == 0 {
 				return nil
 			} else {
@@ -71,10 +71,10 @@ extension sdl {
 			}
 		}
 
-		public static func openCaptureDevice(device: String?, spec: AudioSpec, allowedChanges: AudioChange = AudioChange.NONE) -> AudioDevice? {
+		public static func openCaptureDevice(device: String?, spec: SDL_AudioSpec, allowedChanges: SDL_AudioAllowedChanges = []) -> AudioDevice? {
 			var desiredSpec : AudioSpec = spec
 			var obtainedSpec : AudioSpec = AudioSpec()
-			let res = SDL_OpenAudioDevice(device, 1, &desiredSpec, &obtainedSpec, allowedChanges.rawValue)
+			let res = SDL_OpenAudioDevice(device, 1, &desiredSpec, &obtainedSpec, allowedChanges)
 			if res == 0 {
 				return nil
 			} else {

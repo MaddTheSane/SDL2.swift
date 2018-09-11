@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 public struct TouchDevice {
 	init(deviceID: SDL_TouchID) {

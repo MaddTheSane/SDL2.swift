@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 public typealias Point = SDL_Point
 extension Point {

@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 // TODO: SDL_CreateWindowFrom
 // TODO: SDL_GetWindowData - not needed?
@@ -29,9 +29,9 @@ public class Window {
 
 	public init(title: String = "Untitled Window",
 				width: Int = 800, height: Int = 600,
-				x: Int = SDL_WINDOWPOS_CENTERED, y: Int = SDL_WINDOWPOS_CENTERED,
-				flags: WindowFlags = WindowFlags(rawValue: 0)) {
-		theWindow = SDL_CreateWindow(title, Int32(x), Int32(y), Int32(width), Int32(height), flags.rawValue)
+				x: Int32 = SDL_WINDOWPOS_CENTERED, y: Int32 = SDL_WINDOWPOS_CENTERED,
+				flags: SDL_WindowFlags = []) {
+		theWindow = SDL_CreateWindow(title, Int32(x), Int32(y), Int32(width), Int32(height), flags)
 		theRenderer = nil
 
 		windows[SDL_GetWindowID(theWindow)] = Weak<Window>(self)
@@ -50,9 +50,9 @@ public class Window {
 		}
 	}
 
-	public var flags: WindowFlags {
+	public var flags: SDL_WindowFlags {
 		get {
-			return WindowFlags(rawValue: SDL_GetWindowFlags(theWindow))
+			return SDL_GetWindowFlags(theWindow)
 		}
 	}
 
@@ -87,10 +87,10 @@ public class Window {
 
 	public var grab: Bool {
 		get {
-			return SDL_GetWindowGrab(theWindow) == SDL_TRUE
+			return SDL_GetWindowGrab(theWindow) == .TRUE
 		}
 		set(isGrabbed) {
-			SDL_SetWindowGrab(theWindow, isGrabbed ? SDL_TRUE : SDL_FALSE)
+			SDL_SetWindowGrab(theWindow, isGrabbed ? .TRUE : .FALSE)
 		}
 	}
 
@@ -225,11 +225,11 @@ public class Window {
 	}
 
 	public func setBordered(_ bordered: Bool) {
-		SDL_SetWindowBordered(theWindow, bordered ? SDL_TRUE : SDL_FALSE)
+		SDL_SetWindowBordered(theWindow, bordered ? .TRUE : .FALSE)
 	}
 
-	public func setFullscreenFlags(_ flags: WindowFlags) {
-		SDL_SetWindowFullscreen(theWindow, flags.rawValue)
+	public func setFullscreenFlags(_ flags: SDL_WindowFlags) {
+		SDL_SetWindowFullscreen(theWindow, flags)
 	}
 
 	// public func setResizable(_ resizable: Bool) {

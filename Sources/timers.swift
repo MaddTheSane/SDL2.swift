@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 extension sdl {
 	public class func delay(ms delay: Int) {
@@ -21,7 +21,7 @@ extension sdl {
 	// be released. Might need to maintain an internal map of timer IDs and
 	// manage them manually...
 	public class func clearTimeout(id timerId: TimerID) -> Bool {
-		return SDL_RemoveTimer(timerId) == SDL_TRUE
+		return SDL_RemoveTimer(timerId).boolValue
 	}
 
 	public class func getPerformanceCounter() -> UInt64 {

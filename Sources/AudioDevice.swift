@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 // TODO: dequeue (need SDL 2.0.5)
 

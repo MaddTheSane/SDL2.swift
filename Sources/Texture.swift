@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 // TODO: SDL_QueryTexture() - need a repr. for format/access
 // TODO: updateRect() should have variants for different input types:

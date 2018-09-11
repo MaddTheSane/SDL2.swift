@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 // TODO: SDL_ConvertSurface
 // TODO: SDL_CreateRGBSurfaceFrom
@@ -16,7 +16,7 @@ public class Surface {
 				gmask: UInt32 = 0x0000FF00,
 				bmask:UInt32 = 0x000000FF,
 				amask:UInt32 = 0xFF000000) {
-		theSurface = SDL_CreateRGBSurface(0, Int32(width), Int32(height), Int32(depth), rmask, gmask, bmask, amask)
+		theSurface = SDL_CreateRGBSurface([], Int32(width), Int32(height), Int32(depth), rmask, gmask, bmask, amask)
 		owned = true
 		pixelFormat = PixelFormat.forNativeFormat(theSurface.pointee.format)
 	}
@@ -53,7 +53,7 @@ public class Surface {
 	}
 
 	public func convertedToPixelFormat(pixelFormat: PixelFormat) -> Surface {
-		return Surface(sdlSurface: SDL_ConvertSurface(theSurface, pixelFormat.sdlPixelFormat(), Uint32(0)))
+		return Surface(sdlSurface: SDL_ConvertSurface(theSurface, pixelFormat.sdlPixelFormat(), []))
 	}
 
 	/*

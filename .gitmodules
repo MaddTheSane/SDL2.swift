@@ -1,0 +1,9 @@
+[submodule "Vendor/SDL_image"]
+	path = Vendor/SDL_image
+	url = git@github.com:MaddTheSane/SDL_image.git
+[submodule "Vendor/SDL_ttf"]
+	path = Vendor/SDL_ttf
+	url = git@github.com:MaddTheSane/SDL_ttf.git
+[submodule "Vendor/SDL"]
+	path = Vendor/SDL
+	url = git@github.com:MaddTheSane/SDL.git

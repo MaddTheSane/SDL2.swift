@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 public class DummyContext {}
 let theDummyContext = DummyContext()

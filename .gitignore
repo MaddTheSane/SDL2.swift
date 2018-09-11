@@ -1,3 +1,6 @@
 .build
 Packages
 Sources/constants.swift
+project.xcworkspace/
+xcuserdata/
+Package.resolved

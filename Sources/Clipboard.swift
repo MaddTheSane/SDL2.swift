@@ -1,8 +1,8 @@
-import CSDL2
+import SDL2
 
 public class Clipboard {
 	public static func hasText() -> Bool {
-		return SDL_HasClipboardText() == SDL_TRUE
+		return SDL_HasClipboardText() == .TRUE
 	}
 
 	public static func getText() -> String? {

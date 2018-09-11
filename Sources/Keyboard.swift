@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 // TODO: SDL_GetKeyboardFocus - need SDL_Window* -> Window mapping
 // TODO: SDL_GetKeyboardState - need a wrapper class for keyboard state
@@ -32,30 +32,30 @@ public class Keyboard {
 
 	public static func scancodeForKey(keycode: Keycode) -> Scancode? {
 		let sc = SDL_GetScancodeFromKey(keycode)
-		return (sc == SDL_SCANCODE_UNKNOWN) ? nil : sc
+		return (sc == .SCANCODE_UNKNOWN) ? nil : sc
 	}
 
 	public static func scancodeForName(name: String) -> Scancode? {
 		let sc = SDL_GetScancodeFromName(name)
-		return (sc == SDL_SCANCODE_UNKNOWN) ? nil : sc
+		return (sc == .SCANCODE_UNKNOWN) ? nil : sc
 	}
 
 	//
 	// Screen keyboard
 
 	public static func isScreenKeyboardSupported() -> Bool {
-		return SDL_HasScreenKeyboardSupport() == SDL_TRUE
+		return SDL_HasScreenKeyboardSupport().boolValue
 	}
 
 	public static func isScreenKeyboardShownOnWindow(window: Window) -> Bool {
-		return SDL_IsScreenKeyboardShown(window._sdlWindow()) == SDL_TRUE	
+		return SDL_IsScreenKeyboardShown(window._sdlWindow()).boolValue
 	}
 
 	//
 	// Text input
 
 	public static func isTextInputActive() -> Bool {
-		return SDL_IsTextInputActive() == SDL_TRUE	
+		return SDL_IsTextInputActive().boolValue
 	}
 
 	public static func startTextInput() {

@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 public struct VideoDriver {
 	public static var count: Int {

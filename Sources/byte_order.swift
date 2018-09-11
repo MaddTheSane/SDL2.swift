@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 public extension sdl {
 	public class byteorder {

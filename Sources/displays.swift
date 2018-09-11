@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 /*
 SDL_ShowMessageBox
@@ -23,7 +23,7 @@ public extension sdl {
 	}
 
 	public static func isScreenSaverEnabled() -> Bool {
-		return SDL_IsScreenSaverEnabled() == SDL_TRUE
+		return SDL_IsScreenSaverEnabled().boolValue
 	}
 
 	public static func videoInit(driverName: String? = nil) -> Bool {

@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 // TODO: SDL_GL_LoadLibrary (don't think I need it)
 // TODO: SDL_GL_UnloadLibrary (don't think I need it)
@@ -15,7 +15,7 @@ extension sdl {
 		}
 
 		public static func supports(ext: String) -> Bool {
-			return SDL_GL_ExtensionSupported(ext) == SDL_TRUE
+			return SDL_GL_ExtensionSupported(ext).boolValue
 		}
 
 		public static func getAttribute(name: GLattr) -> Int32 {

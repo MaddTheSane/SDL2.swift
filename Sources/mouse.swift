@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 // TODO: SDL_GetMouseFocus - need a way to map SDL_Window* to Window
 // TODO: SDL_CaptureMouse - undefined?
@@ -20,15 +20,15 @@ public class Mouse {
 	// }
 
 	public static func enableRelativeMouseMode() -> Bool {
-		return SDL_GetRelativeMouseMode() == SDL_TRUE
+		return SDL_GetRelativeMouseMode().boolValue
 	}
 
 	public static func enableRelativeMouseMode() {
-		SDL_SetRelativeMouseMode(SDL_TRUE)
+		SDL_SetRelativeMouseMode(true)
 	}
 
 	public static func disableRelativeMouseMode() {
-		SDL_SetRelativeMouseMode(SDL_FALSE)	
+		SDL_SetRelativeMouseMode(false)
 	}
 
 	public static func warpMouseTo(x: Int, y: Int, inWindow window: Window) {

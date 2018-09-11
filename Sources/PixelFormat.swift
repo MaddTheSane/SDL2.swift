@@ -1,18 +1,11 @@
-import CSDL2
+import SDL2
+import SDL2.SDL_pixels
 
 // TODO: cache pixel formats created in forNativeFormat()
 // TODO: everything palette related
 // TODO: SDL_MasksToPixelFormatEnum(), SDL_PixelFormatEnumToMasks()
 // TODO: cache this
 // TODO: pixel format enums
-
-public class PixelFormats {
-	public static let ARGB8888: UInt32 = UInt32(SDL_PIXELFORMAT_ARGB8888)
-
-	public class func forFormat(format: UInt32) -> PixelFormat {
-		return PixelFormat(format: SDL_AllocFormat(format))
-	}
-}
 
 public class PixelFormat {
 	public class func forNativeFormat(_ format: UnsafeMutablePointer<SDL_PixelFormat>) -> PixelFormat {
@@ -23,7 +16,7 @@ public class PixelFormat {
 		theFormat = format
 	}
 
-	public var format: UInt32 {
+	public var format: SDL_PixelFormatFormat {
 		get { return theFormat.pointee.format }
 	}
 

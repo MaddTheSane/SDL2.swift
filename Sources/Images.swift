@@ -1,4 +1,5 @@
-import CSDL2
+import SDL2
+import SDL2_Image
 
 // TODO: Images.load() should throw on failure
 // (this seems to be the idiomatic thing to do now)

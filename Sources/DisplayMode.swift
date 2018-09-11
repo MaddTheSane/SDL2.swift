@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 public typealias DisplayMode = SDL_DisplayMode
 extension DisplayMode {

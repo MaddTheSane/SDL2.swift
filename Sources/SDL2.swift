@@ -1,4 +1,4 @@
-import CSDL2
+import SDL2
 
 public class sdl {}
 
@@ -32,7 +32,7 @@ public struct MessageBoxFlag : RawRepresentable, Equatable {
 
 public func showSimpleMessageBox(type: MessageBoxType, title: String, message: String, window: Window? = nil) {
 	let w = (window == nil) ? nil : window!._sdlWindow()
-	SDL_ShowSimpleMessageBox(UInt32(0), title, message, w)
+	SDL_ShowSimpleMessageBox([], title, message, w)
 }
 
 public func calculateGammaRamp(gamma: Float, ramp: [UInt16]) {
@@ -43,12 +43,12 @@ public func calculateGammaRamp(gamma: Float, ramp: [UInt16]) {
 public extension sdl {
 	// REVIEW: should this throw on failure?
 	@discardableResult public class func start() -> Bool {
-		return start(subsystems: InitOptions.EVERYTHING)
+		return start(subsystems: .everything)
 	}
 
 	// REVIEW: should this throw on failure?
-	public class func start(subsystems: InitOptions) -> Bool {
-		return SDL_Init(subsystems.rawValue) >= 0
+	public class func start(subsystems: SDL_InitFlags) -> Bool {
+		return SDL_Init(subsystems) >= 0
 	}
 
 	public class func quit() {
