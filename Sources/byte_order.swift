@@ -1,7 +1,8 @@
 import SDL2
 
 public extension sdl {
-	public class byteorder {
+	public struct byteorder {
+		private init() {}
 		public static func swap(_ val: Float) -> Float { return SDL_SwapFloat(val) }
 		public static func swap(_ val: UInt16) -> UInt16 { return SDL_Swap16(val) }
 		public static func swap(_ val: UInt32) -> UInt32 { return SDL_Swap32(val) }

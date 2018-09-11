@@ -17,7 +17,7 @@ extension Rect {
 		x = 0; y = 0; w = 0; h = 0
 	}
 
-	public func isZero() -> Bool {
+	public var isZero: Bool {
 		return x == 0 && y == 0 && w == 0 && h == 0
 	}
 

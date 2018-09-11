@@ -39,7 +39,6 @@
 		551B0EE92147AA0700895306 /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551B0ECB2147AA0700895306 /* Texture.swift */; };
 		551B0EEA2147AA0700895306 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551B0ECC2147AA0700895306 /* Display.swift */; };
 		551B0F1A2147AAEB00895306 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551B0F022147AA7600895306 /* SDL2_image.framework */; };
-		551B0F1B2147AAEB00895306 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551B0F0E2147AA9100895306 /* SDL2_ttf.framework */; };
 		551B0F1C2147AAEB00895306 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551B0EF42147AA6000895306 /* SDL2.framework */; };
 		551B0F1E214815F700895306 /* SDLHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551B0F1D214815F600895306 /* SDLHelpers.swift */; };
 /* End PBXBuildFile section */
@@ -184,7 +183,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				551B0F1A2147AAEB00895306 /* SDL2_image.framework in Frameworks */,
-				551B0F1B2147AAEB00895306 /* SDL2_ttf.framework in Frameworks */,
 				551B0F1C2147AAEB00895306 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

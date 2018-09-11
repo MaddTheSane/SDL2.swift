@@ -5,7 +5,8 @@ import SDL2
 // TODO: SDL_GL_GetProcAddress (don't think I need it)
 
 extension sdl {
-	public class gl {
+	public struct gl {
+		private init() {}
 		public static func createContext(window: Window) -> GLContext? {
 			return SDL_GL_CreateContext(window._sdlWindow())
 		}

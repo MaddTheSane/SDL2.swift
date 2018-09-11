@@ -1,7 +1,8 @@
 import SDL2
 
 public extension sdl {
-	public class fs {
+	public struct fs {
+		private init() {}
 		public static var basePath: String {
 			get { return String(cString: SDL_GetBasePath()) }
 		}

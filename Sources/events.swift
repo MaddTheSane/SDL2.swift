@@ -11,7 +11,8 @@ public class WatchID {
 	let cb: EventWatchCallback
 }
 
-public class Events {
+public struct Events {
+	private init() {}
 
 	public static func isEventTypeEnabled(type: SDL_EventType) -> Bool {
 		return SDL_EventState(type, -1) == 1
@@ -25,15 +26,15 @@ public class Events {
 		return SDL_RegisterEvents(Int32(count))
 	}
 
-	public class func pump() {
+	public static func pump() {
 		SDL_PumpEvents()
 	}
 
-	public class func push(evt: inout Event) {
+	public static func push(evt: inout Event) {
 		SDL_PushEvent(&evt)
 	}
 
-	public class func poll() -> Event? {
+	public static func poll() -> Event? {
 		var evt = Event()
 		if poll(&evt) {
 			return evt
@@ -42,17 +43,17 @@ public class Events {
 		}
 	}
 
-	public class func poll(_ evt: inout Event) -> Bool {
+	public static func poll(_ evt: inout Event) -> Bool {
 		return SDL_PollEvent(&evt) == Int32(1)
 	}
 
-	public class func wait() -> Event {
+	public static func wait() -> Event {
 		var evt = Event()
 		wait(evt: &evt)
 		return evt
 	}
 
-	public class func wait(timeout: Int) -> Event? {
+	public static func wait(timeout: Int) -> Event? {
 		var evt = Event()
 		if wait(evt: &evt, timeout: timeout) {
 			return evt
@@ -61,58 +62,58 @@ public class Events {
 		}
 	}
 
-	public class func wait(evt: inout Event) {
+	public static func wait(evt: inout Event) {
 		SDL_WaitEvent(&evt)
 	}
 
-	public class func wait(evt: inout Event, timeout: Int) -> Bool {
+	public static func wait(evt: inout Event, timeout: Int) -> Bool {
 		return SDL_WaitEventTimeout(&evt, Int32(timeout)) == 1
 	}
 
-	public class func flush(type: SDL_EventType) {
+	public static func flush(type: SDL_EventType) {
 		SDL_FlushEvent(type)
 	}
 
-	public class func flush(type: UInt32) {
+	public static func flush(type: UInt32) {
 		SDL_FlushEvent(SDL_EventType(rawValue: SDL_EventType.RawValue(type))!)
 	}
 
-	public class func flush(minType min: SDL_EventType, maxType max: SDL_EventType) {
+	public static func flush(minType min: SDL_EventType, maxType max: SDL_EventType) {
 		SDL_FlushEvents(min, max)
 	}	
 
-	public class func flush(minType min: UInt32, maxType max: UInt32) {
+	public static func flush(minType min: UInt32, maxType max: UInt32) {
 		SDL_FlushEvents(SDL_EventType(rawValue: SDL_EventType.RawValue(min))!, SDL_EventType(rawValue: SDL_EventType.RawValue(max))!)
 	}
 
-	public class func add(events: inout [Event], count: Int = -1) {
+	public static func add(events: inout [Event], count: Int = -1) {
 		let c = (count == -1) ? events.count : count
 		SDL_PeepEvents(&events, Int32(c), .add, .FIRSTEVENT, .LASTEVENT)
 	}
 
-	public class func get(events: inout [Event], count: Int = -1, minType: SDL_EventType = .FIRSTEVENT, maxType: SDL_EventType = .LASTEVENT) {
+	public static func get(events: inout [Event], count: Int = -1, minType: SDL_EventType = .FIRSTEVENT, maxType: SDL_EventType = .LASTEVENT) {
 		let c = (count == -1) ? events.count : count
 		SDL_PeepEvents(&events, Int32(c), .get, .FIRSTEVENT, .LASTEVENT)
 	}
 
-	public class func peek(events: inout [Event], count: Int = -1, minType: SDL_EventType = .FIRSTEVENT, maxType: SDL_EventType = .LASTEVENT) {
+	public static func peek(events: inout [Event], count: Int = -1, minType: SDL_EventType = .FIRSTEVENT, maxType: SDL_EventType = .LASTEVENT) {
 		let c = (count == -1) ? events.count : count
 		SDL_PeepEvents(&events, Int32(c), .peek, minType, maxType)
 	}
 
-	public class func hasEvent(type: SDL_EventType) -> Bool {
+	public static func hasEvent(type: SDL_EventType) -> Bool {
 		return SDL_HasEvent(type).boolValue
 	}
 
-	public class func hasEvent(type: UInt32) -> Bool {
+	public static func hasEvent(type: UInt32) -> Bool {
 		return SDL_HasEvent(SDL_EventType(rawValue: SDL_EventType.RawValue(type))!).boolValue
 	}
 
-	public class func hasEvents(minType: SDL_EventType, maxType: SDL_EventType) -> Bool {
+	public static func hasEvents(minType: SDL_EventType, maxType: SDL_EventType) -> Bool {
 		return SDL_HasEvents(minType, maxType).boolValue
 	}
 
-	public class func hasEvents(minType: UInt32, maxType: UInt32) -> Bool {
+	public static func hasEvents(minType: UInt32, maxType: UInt32) -> Bool {
 		return SDL_HasEvents(SDL_EventType(rawValue: SDL_EventType.RawValue(minType))!, SDL_EventType(rawValue: SDL_EventType.RawValue(maxType))!).boolValue
 	}
 
@@ -120,11 +121,11 @@ public class Events {
 	//	return SDL_QUItRequested()
 	//}
 
-	public class var numberOfTouchDevices: Int {
+	public static var numberOfTouchDevices: Int {
 		return Int(SDL_GetNumTouchDevices()) 
 	}
 
-	public class func getTouchDevice(index: Int) -> TouchDevice {
+	public static func getTouchDevice(index: Int) -> TouchDevice {
 		return TouchDevice(deviceID: SDL_GetTouchDevice(Int32(index)))
 	}
 

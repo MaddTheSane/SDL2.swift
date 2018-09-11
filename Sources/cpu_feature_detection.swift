@@ -1,7 +1,8 @@
 import SDL2
 
 public extension sdl {
-	public class cpu {
+	public struct cpu {
+		private init() {}
 		public static var cacheLineSize: Int {
 			get { return Int(SDL_GetCPUCacheLineSize()) }
 		}

@@ -14,7 +14,8 @@ import SDL2
 //  - SDL_LoadWAV_RW
 
 extension sdl {
-	public class audio {
+	public struct audio {
+		private init() {}
 		public static func start(driverName: String) -> Bool {
 			return SDL_AudioInit(driverName) == 0
 		}

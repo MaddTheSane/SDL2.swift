@@ -5,7 +5,8 @@ import SDL2
 // TODO: SDL_GetModState - need enum repr
 // TODO: SDL_SetModState - need enum repr
 
-public class Keyboard {
+public struct Keyboard {
+	private init() {}
 
 	//
 	// Conversion

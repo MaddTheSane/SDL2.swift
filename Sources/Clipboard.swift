@@ -1,6 +1,7 @@
 import SDL2
 
-public class Clipboard {
+public struct Clipboard {
+	private init() {}
 	public static func hasText() -> Bool {
 		return SDL_HasClipboardText() == .TRUE
 	}

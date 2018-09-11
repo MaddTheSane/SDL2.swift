@@ -42,35 +42,35 @@ public func SDL_Log(_ fmt: String, _ args: CVarArg...) {
 public func SDL_LogVerbose(_ category: Int32, _ fmt: String, _ args: CVarArg...) {
 	let blankVAList = getVaList([])
 	let outStr = String(format: fmt, arguments: args)
-	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .verbose, outStr, blankVAList)
+	SDL_LogMessageV(category, .verbose, outStr, blankVAList)
 }
 
 /// Log a message with `SDL_LOG_PRIORITY_DEBUG`
 public func SDL_LogDebug(_ category: Int32, _ fmt: String, _ args: CVarArg...) {
 	let blankVAList = getVaList([])
 	let outStr = String(format: fmt, arguments: args)
-	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .debug, outStr, blankVAList)
+	SDL_LogMessageV(category, .debug, outStr, blankVAList)
 }
 
 /// Log a message with `SDL_LOG_PRIORITY_INFO`
 public func SDL_LogInfo(_ category: Int32, _ fmt: String, _ args: CVarArg...) {
 	let blankVAList = getVaList([])
 	let outStr = String(format: fmt, arguments: args)
-	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .info, outStr, blankVAList)
+	SDL_LogMessageV(category, .info, outStr, blankVAList)
 }
 
 /// Log a message with `SDL_LOG_PRIORITY_WARN`
 public func SDL_LogWarn(_ category: Int32, _ fmt: String, _ args: CVarArg...) {
 	let blankVAList = getVaList([])
 	let outStr = String(format: fmt, arguments: args)
-	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .warn, outStr, blankVAList)
+	SDL_LogMessageV(category, .warn, outStr, blankVAList)
 }
 
 /// Log a message with SDL_LOG_PRIORITY_CRITICAL
 public func SDL_LogCritical(_ category: Int32, _ fmt: String, _ args: CVarArg...) {
 	let blankVAList = getVaList([])
 	let outStr = String(format: fmt, arguments: args)
-	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .critical, outStr, blankVAList)
+	SDL_LogMessageV(category, .critical, outStr, blankVAList)
 }
 
 // MARK: -
