@@ -10,19 +10,6 @@ import Foundation
 import SDL2
 import SDL2.SDL_shape
 
-/*
-public var SDL_AUDIO_MASK_BITSIZE: Int32 { get }
-public var SDL_AUDIO_MASK_DATATYPE: Int32 { get }
-public var SDL_AUDIO_MASK_ENDIAN: Int32 { get }
-public var SDL_AUDIO_MASK_SIGNED: Int32 { get }
-*/
-
-//extension SDL_AudioFormat {
-//	var bitSize: UInt8 {
-//		return UInt8(self.rawValue & SDL_AUDIO_MASK_BITSIZE.rawValue)
-//	}
-//}
-
 //MARK: - log
 
 /// Log a message with `SDL_LOG_PRIORITY_ERROR`
@@ -132,6 +119,12 @@ extension SDL_Rect: Equatable {
 	public static func ==(a: SDL_Rect, b: SDL_Rect) -> Bool {
 		return ((a.x == b.x) && (a.y == b.y) &&
 			(a.w == b.w) && (a.h == b.h)) ? true : false
+	}
+}
+
+extension SDL_Point: Equatable {
+	public static func ==(a: SDL_Point, b: SDL_Point) -> Bool {
+		return a.x == b.x && a.y == b.y
 	}
 }
 

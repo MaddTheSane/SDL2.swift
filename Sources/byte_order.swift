@@ -1,6 +1,7 @@
 import SDL2
 
 public extension sdl {
+	@available(*, deprecated, message: "Use Swift's native byte-swapping methods")
 	public struct byteorder {
 		private init() {}
 		public static func swap(_ val: Float) -> Float { return SDL_SwapFloat(val) }
